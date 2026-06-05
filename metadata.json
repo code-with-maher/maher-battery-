@@ -1,0 +1,6 @@
+{
+  "name": "راصد البطارية الذكي",
+  "description": "تطبيق متطور لرصد وتحليل استهلاك بطارية الهاتف بالتفصيل ودعم كامل للغة العربية (MVI architecture).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

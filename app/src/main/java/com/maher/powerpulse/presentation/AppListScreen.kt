@@ -74,7 +74,7 @@ fun AppListScreen(
             FloatingActionButton(
                 onClick = {
                     val nextSorting = if (state.appSorting == AppSortType.TOTAL_CONSUMPTION) {
-                        AppSortType.BACKGROUND_ABUSE
+                        AppSortType.BACKGROUND_CONSUMPTION
                     } else {
                         AppSortType.TOTAL_CONSUMPTION
                     }

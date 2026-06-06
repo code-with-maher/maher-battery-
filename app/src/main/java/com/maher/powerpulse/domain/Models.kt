@@ -48,3 +48,26 @@ data class AnomalyAlert(
 enum class AlertSeverity {
     HIGH, MEDIUM, LOW
 }
+
+data class HardwareSpecsInfo(
+    val totalRamGb: Double,
+    val usedRamGb: Double,
+    val freeRamGb: Double,
+    val ramUsedPercent: Float,
+    val cpuModel: String,
+    val cpuUsagePercent: Float,
+    val gpuModel: String,
+    val gpuUsagePercent: Float,
+    val ramAppsList: List<RamAppUsageInfo>
+)
+
+data class RamAppUsageInfo(
+    val packageName: String,
+    val appName: String,
+    val ramUsageMb: Double,
+    val isSystemProcess: Boolean
+)
+
+enum class RamSortType {
+    BY_USAGE, BY_NAME
+}

@@ -30,6 +30,8 @@ import com.maher.powerpulse.presentation.*
 import com.maher.powerpulse.ui.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
+    private var batteryViewModel: BatteryViewModel? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -53,6 +55,7 @@ class MainActivity : ComponentActivity() {
                     }
 
                     val viewModel: BatteryViewModel = viewModel(factory = modelFactory)
+                    batteryViewModel = viewModel
                     val uiState = viewModel.uiState.collectAsState()
 
                     val navController = rememberNavController()
@@ -128,7 +131,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        // Check permissions again when resuming if the user has navigated to System settings to set OPSTR_GET_USAGE_STATS
-        // We can check if state isSuccess, and reload
+        // Check permissions and reload data automatically when the user returns
+        batteryViewModel?.processIntent(BatteryIntent.SystemPermissionChanged)
     }
 }

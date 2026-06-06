@@ -1,21 +1,31 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+# Strict and Aggressive R8 rules for PowerPulse release optimize
+# Maximize code flattening and shrink resources
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# Suppress all unimportant compiler and framework warnings
+-dontwarn **
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# Allow R8 to perform aggressive optimization on visibility access modifiers and class structures
+-allowaccessmodification
+-repackageclasses ''
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# Extreme optimization passes to shrink class definitions further
+-optimizationpasses 5
+
+# Strip developer / debug logs completely for clean execution and smaller binary size
+-assumenosideeffects class android.util.Log {
+    public static boolean isLoggable(java.lang.String, int);
+    public static int v(...);
+    public static int d(...);
+    public static int i(...);
+    public static int w(...);
+    public static int e(...);
+}
+
+# Preserve Main Activity entry point
+-keep class com.maher.powerpulse.MainActivity { *; }
+
+# Keep Compose function markers
+-keepclassmembers class * {
+    @androidx.compose.runtime.Composable *;
+}
+
